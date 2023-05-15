@@ -53,3 +53,5 @@ node server.js
 Using Insomnia you can call in the different endpoints of the API.
 For the post and put request, follow the structure in the comment of the code.
 
+To see the video of the app working, click [here](https://drive.google.com/file/d/1Nwmf7C5vm5EfvgRsJxte9dOLTc8bfaEp/view)
+
