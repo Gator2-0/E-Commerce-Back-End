@@ -19,13 +19,14 @@ router.get('/', async (req, res) => {
 
 // get one product
 router.get('/:id', async (req, res) => {
+  console.log("get product by id");
   try {
-    const productData = await Category.findByPk(req.params.id, {
-      // JOIN with locations, using the Trip through table
+    const productData = await Product.findByPk(req.params.id, {
       include: [{model: Tag, through: ProductTag, as: 'tagIds'},
                 {model: Category}]
     });
-
+    console.log("productData by id");
+    console.log(productData);
     if (!productData) {
       res.status(404).json({ message: 'No product found with this id!'});
       return;
