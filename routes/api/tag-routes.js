@@ -71,9 +71,15 @@ router.put('/:id', async (req, res) => {
         id: req.params.id,
       },
     })
-    const productTags = ProductTag.findAll({ where: { tag_id: res.params.id } });
-    const productTagIds = productTags.map(({ product_id }) => product_id);
-    const newProductTags = req.body.tagIds
+    console.log(1);
+    console.log(req.params.id);
+    const productTags = ProductTag.findAll({ where: { tag_id: req.params.id } });
+    console.log('productTags');
+    console.log(productTags);
+    const productTagIds = await productTags.map(({ product_id }) => product_id);
+    console.log("productTagIds");
+    console.log(productTagIds);
+    const newProductTags = req.body.productIds
       .filter((product_id) => !productTagIds.includes(product_id))
       .map((product_id) => {
         return {
@@ -81,17 +87,24 @@ router.put('/:id', async (req, res) => {
           tag_id: req.params.id,
         };
       });
-    const productTagsToRemove = productTags
+    console.log(3)
+    const productTagsToRemove = await productTags
       .filter(({ product_id }) => !req.body.productIds.includes(product_id))
       .map(({ id }) => id);
-
-    Promise.all([
-      ProductTag.destroy({ where: { id: productTagsToRemove } }),
-      ProductTag.bulkCreate(newProductTags),
-    ]);
+    console.log("productTagsToRemove");
+    console.log(productTagsToRemove); 
+    if(productTagsToRemove.length){
+      console.log('inside if statement')
+      await ProductTag.destroy({ where: { id: productTagsToRemove } });
+      await ProductTag.bulkCreate(newProductTags);
+    }
+    
+    console.log(4);
+    console.log(tagData);
     res.status(200).json(tagData);
   }
   catch(err){
+    console.log(err);
     res.status(400).json(err);
   }
 
