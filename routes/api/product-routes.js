@@ -17,9 +17,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get one product
-router.get('/:id', async (req, res) => {
-  
+// get one product by id
+router.get('/:id', async (req, res) => { 
   try {
     const productData = await Product.findByPk(req.params.id, {
       include: [{model: Tag, through: ProductTag, as: 'tagIds'},
@@ -111,6 +110,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
+//Delete existing product by id
 router.delete('/:id', async (req, res) => {
   try {
     const productData = await Product.destroy({

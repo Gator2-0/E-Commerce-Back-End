@@ -15,10 +15,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+//Get one category by id
 router.get('/:id', async (req, res) => {
   try {
     const categoryData = await Category.findByPk(req.params.id, {
-      // JOIN with locations, using the Trip through table
       include: [{ model: Product}]
     });
 
@@ -33,6 +33,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//Create new category
 router.post('/', async (req, res) => {
   try {
     const categoryData = await Category.create(req.body);
@@ -42,6 +43,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+//Update existing category by id
 router.put('/:id', async (req, res) => {
   try {
     const categoryData = await Category.update(req.body, {
@@ -59,6 +61,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+//Delete existing category by id
 router.delete('/:id', async (req, res) => {
   try {
     const categoryData = await Category.destroy({
