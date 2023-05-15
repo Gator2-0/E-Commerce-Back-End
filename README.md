@@ -14,6 +14,14 @@ If your README is long, add a table of contents to make it easy for users to fin
 ## Installation
 
 For this app to work you will need to install [mysql](https://coding-boot-camp.github.io/full-stack/mysql/mysql-installation-guide)
+Please make sure to creat a .env file in the root folder.
+it should look like this:
+```
+DB_NAME='ecommerce_db'
+DB_USER='YOUR_USERNAME'
+DB_PASSWORD='YOUR_PASSWORD'
+
+```
 
 
 first install all npm using 
